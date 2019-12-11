@@ -1,0 +1,25 @@
+
+extends ../base.pug
+
+block content
+  h3 User
+
+  a(href="/users/add", class='btn btn-success btn-sm')
+    i.glyphicon.glyphicon-plus
+    span  Add User
+
+  each user in users
+    .media
+      a(href=`/users/${user.id}`)
+        .media-body
+          h4= user.email
+          p= user.name
+
+  if !users.length
+    p No users found.
+
+  if nextPageToken
+    nav
+      ul.pager
+        li
+          a(href=`?pageToken=${encodeURIComponent(nextPageToken)}`) More

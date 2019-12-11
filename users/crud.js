@@ -1,15 +1,3 @@
-// Copyright 2017, Google, Inc.
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//    http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
 
 'use strict';
 
@@ -39,7 +27,7 @@ router.get('/', (req, res, next) => {
       next(err);
       return;
     }
-    res.render('books/list.pug', {
+    res.render('users/list.pug', {
       books: entities,
       nextPageToken: cursor,
     });
@@ -53,7 +41,7 @@ router.get('/', (req, res, next) => {
  */
 // [START add_get]
 router.get('/add', (req, res) => {
-  res.render('books/form.pug', {
+  res.render('users/form.pug', {
     book: {},
     action: 'Add',
   });
@@ -85,13 +73,13 @@ router.post('/add', (req, res, next) => {
  *
  * Display a book for editing.
  */
-router.get('/:book/edit', (req, res, next) => {
+router.get('/:user/edit', (req, res, next) => {
   model.read(req.params.book, (err, entity) => {
     if (err) {
       next(err);
       return;
     }
-    res.render('books/form.pug', {
+    res.render('users/form.pug', {
       book: entity,
       action: 'Edit',
     });
@@ -103,7 +91,7 @@ router.get('/:book/edit', (req, res, next) => {
  *
  * Update a book.
  */
-router.post('/:book/edit', (req, res, next) => {
+router.post('/:user/edit', (req, res, next) => {
   const data = req.body;
 
   model.update(req.params.book, data, (err, savedData) => {
@@ -116,28 +104,28 @@ router.post('/:book/edit', (req, res, next) => {
 });
 
 /**
- * GET /books/:id
+ * GET /users/:id
  *
- * Display a book.
+ * Display a user.
  */
-router.get('/:book', (req, res, next) => {
+router.get('/:user', (req, res, next) => {
   model.read(req.params.book, (err, entity) => {
     if (err) {
       next(err);
       return;
     }
-    res.render('books/view.pug', {
+    res.render('users/view.pug', {
       book: entity,
     });
   });
 });
 
 /**
- * GET /books/:id/delete
+ * GET /users/:id/delete
  *
- * Delete a book.
+ * Delete a user.
  */
-router.get('/:book/delete', (req, res, next) => {
+router.get('/:user/delete', (req, res, next) => {
   model.delete(req.params.book, err => {
     if (err) {
       next(err);
@@ -148,7 +136,7 @@ router.get('/:book/delete', (req, res, next) => {
 });
 
 /**
- * Errors on "/books/*" routes.
+ * Errors on "/users/*" routes.
  */
 router.use((err, req, res, next) => {
   // Format error and forward to generic error handler for logging and

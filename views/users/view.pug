@@ -14,24 +14,21 @@
 extends ../base.pug
 
 block content
-  h3 Books
+  h3 User
+    small
 
-  a(href="/books/add", class='btn btn-success btn-sm')
-    i.glyphicon.glyphicon-plus
-    span  Add book
+  .btn-group
+    a(href=`/users/${user.id}/edit`, class='btn btn-primary btn-sm')
+      i.glyphicon.glyphicon-edit
+      span  Edit user
+    a(href=`/users/${user.id}/delete`, class='btn btn-danger btn-sm')
+      i.glyphicon.glyphicon-trash
+      span  Delete user
 
-  each book in books
-    .media
-      a(href=`/books/${book.id}`)
-        .media-body
-          h4= book.title
-          p= book.author
+  .media
+    .media-body
+      h4= user.title
+        | &nbsp;
+        small= user.email
+      h5 By #{user.name||'unknown'}
 
-  if !books.length
-    p No books found.
-
-  if nextPageToken
-    nav
-      ul.pager
-        li
-          a(href=`?pageToken=${encodeURIComponent(nextPageToken)}`) More

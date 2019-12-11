@@ -1,0 +1,18 @@
+
+
+extends ../base.pug
+
+block content
+  h3 #{action} user
+  form(method="POST")
+    .form-group
+      label(for="email") Email
+      input.form-control(type="text", name="email", id="email", value=user.email)
+    .form-group
+      label(for="name") Nombre
+      input.form-control(type="text", name="name", id="name", value=user.name)
+    .form-group
+      label(for="password") Contraseña
+      input.form-control(type="password", name="password", id="password", value=user.password)
+    .form-group
+    button.btn.btn-success(type="submit") Save
